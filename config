@@ -211,6 +211,20 @@ mode "mouse" {
 }
 bindsym Mod1+m mode "mouse"
 
+# Create windows on startup and load programs inside each window
+# Workspace 1 (left monitor)
+exec --no-startup-id "i3-msg 'workspace 1; append_layout ~/.i3/workspace-1.json'"
+exec --no-startup-id "i3-msg 'workspace 1; exec gnome-terminal'"
+exec --no-startup-id "i3-msg 'workspace 1; exec gnome-terminal'"
+exec --no-startup-id "i3-msg 'workspace 1; exec gnome-terminal'"
+# Workspace 2 (chrome / right monitor)
+exec --no-startup-id "i3-msg 'workspace 2; append_layout ~/.i3/workspace-2.json'"
+exec --no-startup-id "i3-msg 'workspace 2; exec chromium'"
+# Workspace 3 (spotify / right monitor)
+exec --no-startup-id "i3-msg 'workspace 3; append_layout ~/.i3/workspace-3.json'"
+exec --no-startup-id "i3-msg 'workspace 3; exec spotify'"
+
+
 #######################################################################
 # automatically start i3-config-wizard to offer the user to create a
 # keysym-based config which used their favorite modifier (alt or windows)
