@@ -160,7 +160,10 @@ bindsym Mod1+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+    status_command i3status
+    mode hide
+    hidden_state hide
+    modifier Mod1
 }
 
 # Exit i3 without the need to click Confirm button with the mouse
@@ -211,18 +214,51 @@ mode "mouse" {
 }
 bindsym Mod1+m mode "mouse"
 
-# Create windows on startup and load programs inside each window
+#i3-msg move container to workspace number 1
+#i3-msg move workspace to output right
+
+#exec_always --no-startup-id "i3-msg 'workspace 1; exec gnome-terminal'"
+#exec_always --no-startup-id "i3-msg 'workspace 2; exec gnome-terminal'"
+#exec_always --no-startup-id "i3-msg 'workspace 3; exec chromium'"
+#exec_always --no-startup-id "i3-msg 'workspace 4; exec chromium'"
+#exec_always --no-startup-id "i3-msg 'workspace 5; exec chromium'"
+#exec_always --no-startup-id "i3-msg 'workspace 3; exec spotify'"
+
+#exec --no-startup-id "i3-msg 'workspace 1; exec chromium'"
+#exec --no-startup-id "i3-msg 'workspace 1; exec spotify'"
+#exec "i3-msg 'workspace 1; exec chromium'"
+#exec_always spotify
+#exec_always chromium
+# Always start spotify, chrome
+#exec_always gnome-terminal 
+#for_window [class=Gnome-terminal] move window to workspace 1
+#
+#exec_always chromium
+#for_window [class=Chromium] move window to workspace 2
+#
+#exec_always spotify
+#for_window [class=Spotify] move window to workspace 2
+#for_window [class=Spotify] move window to workspace 3
+
+# Move spotify workspace 3 to the right monitor
+# First focus the workspace by focusing the window, then move the workspace to the right monitor
+#for_window [class=Spotify] focus
+
+#exec --no-startup-id "i3-msg [class=Spotify] focus"
+#exec "i3-msg move workspace to output right"
+
+#move workspace to output left
+#move workspace to output right
+
+# Start chromium and move it to workspace 2
+# exec --no-startup-id "i3-msg 'workspace 1; exec chromium'"
+# Start spotify and move it to Workspace 7
+# exec --no-startup-id "i3-msg 'workspace 1; exec spotify'"
 # Workspace 1 (left monitor)
-exec --no-startup-id "i3-msg 'workspace 1; append_layout ~/.i3/workspace-1.json'"
-exec --no-startup-id "i3-msg 'workspace 1; exec gnome-terminal'"
-exec --no-startup-id "i3-msg 'workspace 1; exec gnome-terminal'"
-exec --no-startup-id "i3-msg 'workspace 1; exec gnome-terminal'"
-# Workspace 2 (chrome / right monitor)
-exec --no-startup-id "i3-msg 'workspace 2; append_layout ~/.i3/workspace-2.json'"
-exec --no-startup-id "i3-msg 'workspace 2; exec chromium'"
-# Workspace 3 (spotify / right monitor)
-exec --no-startup-id "i3-msg 'workspace 3; append_layout ~/.i3/workspace-3.json'"
-exec --no-startup-id "i3-msg 'workspace 3; exec spotify'"
+#exec --no-startup-id "i3-msg 'workspace 1; append_layout ~/.i3/workspace-1.json'"
+#exec --no-startup-id "i3-msg 'workspace 1; exec gnome-terminal'"
+#exec --no-startup-id "i3-msg 'workspace 1; exec gnome-terminal'"
+#exec --no-startup-id "i3-msg 'workspace 1; exec gnome-terminal'"
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec "pactl -- set-sink-volume 1 +1%"
@@ -235,6 +271,17 @@ bindsym XF86AudioStop exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer
 # Spotify Prev/Next
 bindsym XF86AudioPrev exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
 bindsym XF86AudioNext exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
+
+# Set background wallpaper
+exec_always feh --bg-scale /home/anonymous/wallpapers/wallpaper.jpg
+# Lock command
+#bindsym Mod1+shift+x exec "i3lock --tiling --ignore-empty-password --color aaaaaa --image '/home/anonymous/wallpapers/wallpaper.png'"
+bindsym Mod1+shift+x exec "i3lock --image '/home/anonymous/shots/scrot.png'"
+
+
+# Make printscreen via 'scrot'
+bindsym Print exec scrot --quality 100 '%Y-%m-%d-%s_screenshot_$wx$h.png' -e 'mv $f ~/Pictures/'
+#bindsym Print exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f ~/screenshots/'
 
 
 #######################################################################
