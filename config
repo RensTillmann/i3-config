@@ -104,29 +104,136 @@ bindsym Mod1+Shift+minus move scratchpad
 # If there are multiple scratchpad windows, this command cycles through them.
 bindsym Mod1+minus scratchpad show
 
+set $workspace1 "1:"
+set $workspace2 "2:"
+set $workspace3 "3:"
+set $workspace4 "4:"
+set $workspace5 "5:"
+set $workspace6 "6:6"
+set $workspace7 "7:7"
+set $workspace8 "8:8"
+set $workspace9 "9:"
+set $workspace10 "0:"
+
 # switch to workspace
-bindsym Mod1+1 workspace 1
-bindsym Mod1+2 workspace 2
-bindsym Mod1+3 workspace 3
-bindsym Mod1+4 workspace 4
-bindsym Mod1+5 workspace 5
-bindsym Mod1+6 workspace 6
-bindsym Mod1+7 workspace 7
-bindsym Mod1+8 workspace 8
-bindsym Mod1+9 workspace 9
-bindsym Mod1+0 workspace 10
+bindsym Mod1+1 workspace $workspace1
+bindsym Mod1+2 workspace $workspace2
+bindsym Mod1+3 workspace $workspace3
+bindsym Mod1+4 workspace $workspace4
+bindsym Mod1+5 workspace $workspace5
+bindsym Mod1+6 workspace $workspace6
+bindsym Mod1+7 workspace $workspace7
+bindsym Mod1+8 workspace $workspace8
+bindsym Mod1+9 workspace $workspace9
+bindsym Mod1+0 workspace $workspace10
 
 # move focused container to workspace
-bindsym Mod1+Shift+1 move container to workspace 1
-bindsym Mod1+Shift+2 move container to workspace 2
-bindsym Mod1+Shift+3 move container to workspace 3
-bindsym Mod1+Shift+4 move container to workspace 4
-bindsym Mod1+Shift+5 move container to workspace 5
-bindsym Mod1+Shift+6 move container to workspace 6
-bindsym Mod1+Shift+7 move container to workspace 7
-bindsym Mod1+Shift+8 move container to workspace 8
-bindsym Mod1+Shift+9 move container to workspace 9
-bindsym Mod1+Shift+0 move container to workspace 10
+bindsym Mod1+Shift+1 move container to workspace $workspace1
+bindsym Mod1+Shift+2 move container to workspace $workspace2
+bindsym Mod1+Shift+3 move container to workspace $workspace3
+bindsym Mod1+Shift+4 move container to workspace $workspace4
+bindsym Mod1+Shift+5 move container to workspace $workspace5
+bindsym Mod1+Shift+6 move container to workspace $workspace6
+bindsym Mod1+Shift+7 move container to workspace $workspace7
+bindsym Mod1+Shift+8 move container to workspace $workspace8
+bindsym Mod1+Shift+9 move container to workspace $workspace9
+bindsym Mod1+Shift+0 move container to workspace $workspace10
+
+#move <left|right|down|up> [<px> px]
+
+# Connect workspaces to correct monitor output
+# This makes sure each workspace will always have a fixed position
+# e.g chrome and spotify are always located at the right output (DVI-D-1)
+#DVI-D-1
+#HDMI-1
+workspace $workspace1 output DVI-D-1
+workspace $workspace2 output DVI-D-1
+workspace $workspace3 output DVI-D-1
+workspace $workspace4 output DVI-D-1
+workspace $workspace5 output HDMI-1
+workspace $workspace6 output HDMI-1
+workspace $workspace7 output HDMI-1
+workspace $workspace8 output HDMI-1
+workspace $workspace9 output HDMI-1
+workspace $workspace10 output HDMI-1
+
+#workspace  output HDMI-1
+#workspace  output DVI-I-1
+#workspace  output DVI-I-1
+#workspace  output DVI-I-1
+#workspace  output DVI-I-1
+#workspace  output DVI-I-1
+exec --no-startup-id i3-msg 'workspace $workspace1; exec gnome-terminal'
+exec --no-startup-id i3-msg 'workspace $workspace1; exec gnome-terminal'
+exec --no-startup-id i3-msg 'workspace $workspace2; exec gnome-terminal --working-directory=projects/super-forms/src/'
+exec --no-startup-id i3-msg 'workspace $workspace3; exec gnome-terminal --working-directory=projects/super-forms/src/assets/js'
+exec --no-startup-id i3-msg 'workspace $workspace4; exec gnome-terminal --working-directory=projects/super-forms/src/assets/css'
+exec --no-startup-id i3-msg 'workspace $workspace9; exec gnome-terminal -- vmail'
+exec --no-startup-id i3-msg 'workspace $workspace10; exec chromium'
+exec --no-startup-id i3-msg 'workspace $workspace5; exec spotify'
+assign [class="Chromium"] $workspace10
+assign [class="Spotify"] $workspace5
+
+
+## Focus left monitor
+#exec --no-startup-id i3-msg 'focus output left'
+#exec --no-startup-id i3-msg 'workspace ; exec gnome-terminal'
+#
+## Focus right monitor
+#exec --no-startup-id i3-msg 'focus output right'
+#exec --no-startup-id i3-msg 'workspace ; exec spotify'
+#
+## Focus left monitor
+#exec --no-startup-id i3-msg 'focus output right'
+#exec --no-startup-id i3-msg 'workspace ; exec chromium'
+#
+#exec --no-startup-id i3-msg 'move container to workspace '
+#assign [class="Spotify"] $workspace5
+#assign [class="Chromium"] $workspace10
+
+#exec --no-startup-id i3-msg 'move workspace to output right'
+
+#bindsym $mod+1 workspace 1
+#bindsym $mod+2 workspace 2
+#bindsym $mod+3 workspace 3:<span foreground="red">vim</span>
+#...
+#
+#bindsym $mod+Shift+1 move container to workspace 1
+#bindsym $mod+Shift+2 move container to workspace 2
+#...
+#
+## switch between the current and the previously focused one
+#bindsym $mod+b workspace back_and_forth
+#bindsym $mod+Shift+b move container to workspace back_and_forth
+#
+## move the whole workspace to the next output
+#bindsym $mod+x move workspace to output right
+#
+## move firefox to current workspace
+#bindsym $mod+F1 [class="Firefox"] move workspace current
+
+
+
+
+# Start up programs
+#exec --no-startup-id i3-msg 'workspace $workspace1; exec gnome-terminal; workspace $workspace1'
+#exec --no-startup-id i3-msg 'workspace $workspace1; exec gnome-terminal; workspace $workspace1'
+#exec --no-startup-id i3-msg 'workspace $workspace1; exec gnome-terminal; workspace $workspace1'
+#exec --no-startup-id i3-msg 'workspace $workspace5; exec chromium; workspace $workspace1'
+
+
+
+#exec_always --name term1 gnome-terminal
+#exec gnome-terminal
+#exec chromium
+#assign [class="Gnome-terminal"] $workspace1
+#assign [class="Chromium"] $workspace5
+#
+#exec gnome-terminal
+#assign [class="Gnome-terminal"] $workspace2
+#
+#assign [class="Spotify"] $workspace10
+# exec spotify
 
 # reload the configuration file
 bindsym Mod1+Shift+c reload
@@ -164,6 +271,8 @@ bar {
     mode hide
     hidden_state hide
     modifier Mod1
+    font pango:monospace 18
+    strip_workspace_numbers yes
 }
 
 # Exit i3 without the need to click Confirm button with the mouse
@@ -275,13 +384,13 @@ bindsym XF86AudioNext exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer
 # Set background wallpaper
 exec_always feh --bg-scale /home/anonymous/wallpapers/wallpaper.jpg
 # Lock command
-#bindsym Mod1+shift+x exec "i3lock --tiling --ignore-empty-password --color aaaaaa --image '/home/anonymous/wallpapers/wallpaper.png'"
-bindsym Mod1+shift+x exec "i3lock --image '/home/anonymous/shots/scrot.png'"
-
+bindsym Mod1+shift+x exec "i3lock --tiling --ignore-empty-password --color 000000 --image '/home/anonymous/wallpapers/i3lock.png'"
 
 # Make printscreen via 'scrot'
-bindsym Print exec scrot --quality 100 '%Y-%m-%d-%s_screenshot_$wx$h.png' -e 'mv $f ~/Pictures/'
-#bindsym Print exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f ~/screenshots/'
+bindsym Print exec scrot --quality 100 '%Y-%m-%d-%s_screenshot_$wx$h.png' -e 'mv $f ~/shots/'
+
+# Automatically start Flameshot to make snippets
+exec flameshot
 
 
 #######################################################################
