@@ -109,15 +109,15 @@ bindsym Mod1+Shift+minus move scratchpad
 bindsym Mod1+minus scratchpad show
 
 set $workspace1 "1:"
-set $workspace2 "2:"
-set $workspace3 "3:"
-set $workspace4 "4:"
-set $workspace5 "5:"
-set $workspace6 "6:6"
-set $workspace7 "7:7"
-set $workspace8 "8:8"
-set $workspace9 "9:"
-set $workspace10 "0:"
+set $workspace2 "2:"
+set $workspace3 "3:3"
+set $workspace4 "4:4"
+set $workspace5 "5:5"
+set $workspace6 "0:6"
+set $workspace7 "9:"
+set $workspace8 "8:"
+set $workspace9 "7:"
+set $workspace10 "6:"
 
 # switch to workspace
 bindsym Mod1+1 workspace $workspace1
@@ -153,36 +153,30 @@ workspace $workspace1 output DVI-D-1
 workspace $workspace2 output DVI-D-1
 workspace $workspace3 output DVI-D-1
 workspace $workspace4 output DVI-D-1
-workspace $workspace5 output HDMI-1
+workspace $workspace5 output DVI-D-1
 workspace $workspace6 output HDMI-1
 workspace $workspace7 output HDMI-1
 workspace $workspace8 output HDMI-1
 workspace $workspace9 output HDMI-1
 workspace $workspace10 output HDMI-1
 
-#workspace  output HDMI-1
-#workspace  output DVI-I-1
-#workspace  output DVI-I-1
-#workspace  output DVI-I-1
-#workspace  output DVI-I-1
-#workspace  output DVI-I-1
-
 exec --no-startup-id i3-msg 'workspace $workspace1; exec gnome-terminal --class=Term1'
 exec --no-startup-id i3-msg 'workspace $workspace1; exec gnome-terminal --class=Term2'
 # Open Root directory and open file browsing in Vim
-exec --no-startup-id i3-msg 'workspace $workspace2; exec gnome-terminal --class=PHP --working-directory=projects/super-forms/src/ -- vi -c :e .'
-# Open JS directory and open file browsing in Vim
-exec --no-startup-id i3-msg 'workspace $workspace3; exec gnome-terminal --class=JS --working-directory=projects/super-forms/src/assets/js -- vi -c :e .'
-# Open CSS directory and open file browsing in Vim
-exec --no-startup-id i3-msg 'workspace $workspace4; exec gnome-terminal --class=CSS --working-directory=projects/super-forms/src/assets/css -- vi -c :e .'
+exec --no-startup-id i3-msg "workspace $workspace2; exec gnome-terminal --class=PHP -- vi -c ':cd ~/projects/super-forms/src/' -c ':e .' -c ':TabooRename PHP' -c ':tabnew' -c ':TabooRename JS' -c ':e assets/js/.' -c ':tabnew' -c ':TabooRename CSS' -c ':e assets/css/.' -c ':tabfirst'"
+# exec --no-startup-id i3-msg 'workspace $workspace3; exec gnome-terminal --class=JS --working-directory=projects/super-forms/src/assets/js -- vi -c :e .'
+# exec --no-startup-id i3-msg 'workspace $workspace4; exec gnome-terminal --class=CSS --working-directory=projects/super-forms/src/assets/css -- vi -c :e .'
 
 # Start Applications
 # Spotify
 exec i3-msg 'workspace $workspace1; exec spotify'
-for_window [class="Spotify"] move to workspace $workspace5
+for_window [class="Spotify"] move to workspace $workspace7
 # Chromium
-exec i3-msg 'workspace $workspace1; exec chromium'
-for_window [class="Chromium"] move to workspace $workspace10
+exec i3-msg 'workspace $workspace10; exec chromium-browser --new-window http://dev.f4d.nl/wp-admin'
+for_window [title="WordPress"] move to workspace $workspace10
+# Google Hangouts
+exec i3-msg 'workspace $workspace1; exec chromium-browser --new-window https://hangouts.google.com/'
+for_window [title="Hangouts"] move to workspace $workspace8
 # Vmail (gmail)
 exec i3-msg 'workspace $workspace9; exec gnome-terminal --class=Vmail -- vmail'
 # Flameshot
@@ -283,9 +277,11 @@ bindsym Mod1+m mode "mouse"
 
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec "pactl -- set-sink-volume 1 +1%"
-bindsym XF86AudioLowerVolume exec "pactl -- set-sink-volume 1 -1%"
-bindsym XF86AudioMute exec "pactl set-sink-mute 1 toggle"
+# 1 == Headphones
+# 2 == Speakers
+bindsym XF86AudioRaiseVolume exec "pactl -- set-sink-volume 2 +1%; pactl -- set-sink-volume 1 +1%"
+bindsym XF86AudioLowerVolume exec "pactl -- set-sink-volume 2 -1%; pactl -- set-sink-volume 1 -1%"
+bindsym XF86AudioMute exec "pactl set-sink-mute 2 toggle; pactl set-sink-mute 1 toggle"
 
 # Spotify Pause/Play
 bindsym XF86AudioPlay exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
@@ -293,6 +289,8 @@ bindsym XF86AudioStop exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer
 # Spotify Prev/Next
 bindsym XF86AudioPrev exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
 bindsym XF86AudioNext exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
+# Start playing music automatically on startup
+exec "sleep 5; dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
 
 # Set background wallpaper
 exec_always feh --bg-scale /home/anonymous/wallpapers/wallpaper.jpg
