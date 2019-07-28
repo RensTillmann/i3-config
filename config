@@ -163,7 +163,7 @@ workspace $workspace10 output HDMI-1
 exec --no-startup-id i3-msg 'workspace $workspace1; exec gnome-terminal --class=Term1'
 exec --no-startup-id i3-msg 'workspace $workspace1; exec gnome-terminal --class=Term2'
 # Open Root directory and open file browsing in Vim
-exec --no-startup-id i3-msg "workspace $workspace2; exec gnome-terminal --class=PHP -- vi -c ':cd ~/projects/super-forms/src/' -c ':e .' -c ':TabooRename PHP' -c ':tabnew' -c ':TabooRename JS' -c ':e assets/js/.' -c ':tabnew' -c ':TabooRename CSS' -c ':e assets/css/.' -c ':tabfirst'"
+exec --no-startup-id i3-msg "workspace $workspace2; exec gnome-terminal --class=PHP -- vi -S ~/super-forms.vi"
 # exec --no-startup-id i3-msg 'workspace $workspace3; exec gnome-terminal --class=JS --working-directory=projects/super-forms/src/assets/js -- vi -c :e .'
 # exec --no-startup-id i3-msg 'workspace $workspace4; exec gnome-terminal --class=CSS --working-directory=projects/super-forms/src/assets/css -- vi -c :e .'
 
